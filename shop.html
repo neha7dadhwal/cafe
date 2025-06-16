@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cafe Aroma - Freshly Brewed Coffee & Pastries</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      color: #3b2f2f;
+      background: #fdf6f0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    a {
+      color: #6b4226;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: #a26632;
+      outline: none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    /* Layout variables */
+    :root {
+      --header-height: 64px;
+      --primary-color: #6b4226;
+      --accent-color: #a26632;
+      --bg-glass: rgba(255 255 255 / 0.7);
+      --shadow-glass: rgba(107, 66, 38, 0.15);
+      --border-radius: 16px;
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      --spacing-lg: 32px;
+      --spacing-xl: 48px;
+      --font-base: 1rem;
+      --font-lg: 1.25rem;
+      --font-xl: 1.75rem;
+      --font-xxl: 2.5rem;
+      --line-height-heading: 1.2;
+      --transition-speed: 0.3s;
+      --max-content-width: 1200px;
+      --shadow-light: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    /* Glass Morphism Header */
+    header {
+      position: sticky;
+      top: 0;
+      height: var(--header-height);
+      background: var(--bg-glass);
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 1px 8px var(--shadow-glass);
+      border-bottom-left-radius: var(--border-radius);
+      border-bottom-right-radius: var(--border-radius);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--spacing-lg);
+      justify-content: space-between;
+      user-select: none;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      color: var(--primary-color);
+      letter-spacing: 1.2px;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 0 2px 6px rgba(107,66,38,0.25);
+    }
+    nav {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+    nav a {
+      font-weight: 600;
+      font-size: var(--font-base);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    nav a .material-icons {
+      font-size: 20px;
+      color: var(--primary-color);
+    }
+    nav a:hover,
+    nav a:focus {
+      background-color: var(--accent-color);
+      color: #fff;
+    }
+    nav a:hover .material-icons,
+    nav a:focus .material-icons {
+      color: #fff;
+    }
+
+    main {
+      min-height: calc(100vh - var(--header-height));
+      max-width: var(--max-content-width);
+      margin: 0 auto;
+      padding: var(--spacing-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xl);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a7478aa1-18b3-417b-a903-ea3ef82f13bd.png') no-repeat center center/cover;
+      border-radius: var(--border-radius);
+      color: #fff;
+      padding: var(--spacing-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 400px;
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: var(--spacing-md);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.7);
+      line-height: var(--line-height-heading);
+    }
+    .hero p {
+      font-size: var(--font-lg);
+      max-width: 600px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      margin-bottom: var(--spacing-lg);
+    }
+    .btn-primary {
+      width: max-content;
+      background: linear-gradient(135deg, #a26632, #6b4226);
+      color: #fff;
+      padding: 14px 32px;
+      font-size: var(--font-base);
+      font-weight: 700;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(107, 66, 38, 0.4);
+      transition: all var(--transition-speed) ease;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: linear-gradient(135deg, #6b4226, #a26632);
+      box-shadow: 0 10px 28px rgba(107, 66, 38, 0.6);
+      outline: none;
+    }
+
+    /* Sections */
+    section {
+      padding: 0 var(--spacing-md);
+      max-width: var(--max-content-width);
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: var(--font-xxl);
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-lg);
+      text-align: center;
+      font-weight: 900;
+    }
+
+
+    /* Menu Highlights Grid */
+    .menu-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: var(--spacing-lg);
+    }
+    .menu-card {
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .menu-card:hover,
+    .menu-card:focus-within {
+      box-shadow: 0 8px 24px rgba(107,66,38,0.25);
+      outline: none;
+    }
+    .menu-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .menu-content {
+      padding: var(--spacing-md);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .menu-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: var(--font-lg);
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-xs);
+    }
+    .menu-desc {
+      flex-grow: 1;
+      font-size: 0.9rem;
+      color: #5a4a3b;
+      margin-bottom: var(--spacing-sm);
+    }
+    .menu-price {
+      font-weight: 900;
+      color: var(--accent-color);
+      font-size: var(--font-lg);
+      text-align: right;
+    }
+
+    /* About Section */
+    .about-container {
+      display: flex;
+      gap: var(--spacing-lg);
+      background: #fff;
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-light);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .about-image {
+      flex: 1 1 320px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      max-width: 480px;
+      max-height: 320px;
+    }
+    .about-text {
+      flex: 2 1 320px;
+      font-size: var(--font-base);
+      color: #4a3f3f;
+      line-height: 1.5;
+      padding: var(--spacing-sm) 0;
+    }
+    .about-text h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: var(--font-xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--primary-color);
+    }
+    .about-text p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Contact Section */
+    .contact-container {
+      background: #fff;
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: var(--shadow-light);
+    }
+    .contact-container h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: var(--font-xl);
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-lg);
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+    label {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: var(--spacing-sm);
+      font-size: var(--font-base);
+      border-radius: 12px;
+      border: 1.5px solid #c2bfbf;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+      min-height: 40px;
+    }
+    textarea {
+      min-height: 80px;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+      box-shadow: 0 0 8px rgba(162,102,50,0.4);
+    }
+    .btn-submit {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-weight: 700;
+      border-radius: var(--border-radius);
+      font-size: var(--font-base);
+      cursor: pointer;
+      box-shadow: 0 6px 10px rgba(107, 66, 38, 0.4);
+      transition: background-color 0.3s ease;
+    }
+    .btn-submit:hover,
+    .btn-submit:focus {
+      background: var(--accent-color);
+      outline: none;
+      box-shadow: 0 8px 16px rgba(162,102,50,0.6);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-glass);
+      backdrop-filter: saturate(180%) blur(10px);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-top: 1px solid var(--shadow-glass);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: #7a6854;
+      gap: var(--spacing-md);
+      user-select: none;
+    }
+    .social-links {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7a6854;
+      background: transparent;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .social-links a:hover,
+    .social-links a:focus {
+      background: var(--accent-color);
+      color: #fff;
+      outline: none;
+    }
+    .material-icons.md-18 {
+      font-size: 18px;
+    }
+    .material-icons.md-24 {
+      font-size: 24px;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 640px) {
+      nav {
+        gap: 12px;
+      }
+      nav a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+      main {
+        padding: var(--spacing-md);
+      }
+      .hero {
+        min-height: 300px;
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+      section {
+        padding: 0 var(--spacing-sm);
+      }
+      .about-container {
+        flex-direction: column;
+        padding: var(--spacing-md);
+      }
+      .about-image,
+      .about-text {
+        max-width: 100%;
+      }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      main {
+        padding: var(--spacing-lg);
+      }
+      .about-container {
+        flex-wrap: nowrap;
+      }
+      .contact-container {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner" aria-label="Main site header">
+    <a href="#" class="logo" aria-label="Cafe Aroma home">Cafe Aroma</a>
+    <nav aria-label="Primary site navigation">
+      <a href="#menu" tabindex="0"><span class="material-icons" aria-hidden="true">restaurant_menu</span> Menu</a>
+      <a href="#about" tabindex="0"><span class="material-icons" aria-hidden="true">info</span> About</a>
+      <a href="#contact" tabindex="0"><span class="material-icons" aria-hidden="true">email</span> Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" role="region" aria-label="Cafe Aroma hero banner">
+      <h1>Welcome to Cafe Aroma</h1>
+      <p>Freshly brewed coffee, delightful pastries, and a cozy atmosphere just for you.</p>
+      <button class="btn-primary" aria-label="Order Now Button" tabindex="0">Order Now</button>
+    </section>
+
+    <section id="menu" role="region" aria-label="Menu highlights">
+      <h2 class="section-title">Menu Highlights</h2>
+      <div class="menu-highlights">
+        <article class="menu-card" tabindex="0" aria-label="Classic Cappuccino">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c3d40e29-e7f9-4242-b871-9bb9a858df23.png" alt="Classic cappuccino coffee with frothy milk art in ceramic cup on wooden table" class="menu-image" loading="lazy" />
+          <div class="menu-content">
+            <h3 class="menu-title">Classic Cappuccino</h3>
+            <p class="menu-desc">Rich espresso topped with steamed milk and a creamy froth, perfect for any time of day.</p>
+            <p class="menu-price">$4.50</p>
+          </div>
+        </article>
+        <article class="menu-card" tabindex="0" aria-label="Freshly Baked Croissant">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b53858d6-8636-4a99-81a7-76ee9a2e0235.png" alt="Golden, flaky croissant pastry on wooden plate" class="menu-image" loading="lazy" />
+          <div class="menu-content">
+            <h3 class="menu-title">Freshly Baked Croissant</h3>
+            <p class="menu-desc">Buttery, flaky croissant baked fresh daily to accompany your coffee.</p>
+            <p class="menu-price">$3.00</p>
+          </div>
+        </article>
+        <article class="menu-card" tabindex="0" aria-label="Signature Latte">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c0a975c0-1cb4-4d8a-8944-703521160212.png" alt="Signature latte coffee with heart latte art" class="menu-image" loading="lazy" />
+          <div class="menu-content">
+            <h3 class="menu-title">Signature Latte</h3>
+            <p class="menu-desc">Creamy blend of espresso and steamed milk topped with our signature latte art.</p>
+            <p class="menu-price">$5.00</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" role="region" aria-label="About Cafe Aroma">
+      <div class="about-container">
+        <div class="about-image">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bc46e608-0d4b-4a8f-bc8c-7d78010c9a33.png" alt="Warm cozy cafe interior with people relaxing and barista making coffee" loading="lazy" />
+        </div>
+        <div class="about-text">
+          <h2>About Cafe Aroma</h2>
+          <p>At Cafe Aroma, we believe in crafting the perfect cup of coffee tailored to your taste. Our beans are freshly roasted and brewed with love every day. Pair your beverage with a delicious pastry and enjoy the welcoming ambiance that feels like a second home.</p>
+          <p>Our dedicated team of baristas is passionate about making your experience unforgettable. Whether you're grabbing a quick espresso or settling in for a book, Cafe Aroma is the place to be.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" role="region" aria-label="Contact Cafe Aroma">
+      <div class="contact-container">
+        <h2>Contact Us</h2>
+        <form aria-label="Contact form" novalidate>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required aria-required="true" aria-describedby="name-error" placeholder="Your full name" />
+          <span id="name-error" role="alert" aria-live="assertive" class="error-message" style="display:none;color:#d32f2f;font-size:0.875rem;margin-top:4px;">Please enter your name</span>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" aria-describedby="email-error" placeholder="you@example.com" />
+          <span id="email-error" role="alert" aria-live="assertive" class="error-message" style="display:none;color:#d32f2f;font-size:0.875rem;margin-top:4px;">Please enter a valid email</span>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" autocomplete="off" required aria-required="true" aria-describedby="message-error" placeholder="Your message"></textarea>
+          <span id="message-error" role="alert" aria-live="assertive" class="error-message" style="display:none;color:#d32f2f;font-size:0.875rem;margin-top:4px;">Please enter your message</span>
+
+          <button type="submit" class="btn-submit" aria-label="Send message">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" aria-label="Site footer">
+    <span>© 2024 Cafe Aroma. All rights reserved.</span>
+    <div class="social-links" role="navigation" aria-label="Social Media Links">
+      <a href="https://facebook.com/cafearoma" target="_blank" rel="noopener" aria-label="Facebook">
+        <span class="material-icons md-24" aria-hidden="true">facebook</span>
+      </a>
+      <a href="https://instagram.com/cafearoma" target="_blank" rel="noopener" aria-label="Instagram">
+        <span class="material-icons md-24" aria-hidden="true">instagram</span>
+      </a>
+      <a href="https://twitter.com/cafearoma" target="_blank" rel="noopener" aria-label="Twitter">
+        <span class="material-icons md-24" aria-hidden="true">twitter</span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Form Validation
+    const form = document.querySelector('form');
+    const nameInput = form.querySelector('#name');
+    const emailInput = form.querySelector('#email');
+    const messageInput = form.querySelector('#message');
+
+    const nameError = form.querySelector('#name-error');
+    const emailError = form.querySelector('#email-error');
+    const messageError = form.querySelector('#message-error');
+
+    function validateName() {
+      if (nameInput.value.trim() === '') {
+        nameError.style.display = 'block';
+        return false;
+      } else {
+        nameError.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateEmail() {
+      const emailValue = emailInput.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailValue)) {
+        emailError.style.display = 'block';
+        return false;
+      } else {
+        emailError.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateMessage() {
+      if (messageInput.value.trim() === '') {
+        messageError.style.display = 'block';
+        return false;
+      } else {
+        messageError.style.display = 'none';
+        return true;
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const isNameValid = validateName();
+      const isEmailValid = validateEmail();
+      const isMessageValid = validateMessage();
+
+      if (isNameValid && isEmailValid && isMessageValid) {
+        alert('Thank you for contacting Cafe Aroma! We will get back to you soon.');
+        form.reset();
+      }
+    });
+
+    nameInput.addEventListener('input', validateName);
+    emailInput.addEventListener('input', validateEmail);
+    messageInput.addEventListener('input', validateMessage);
+  </script>
+</body>
+</html>
+
